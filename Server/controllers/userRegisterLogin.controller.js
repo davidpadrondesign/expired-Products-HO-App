@@ -5,16 +5,15 @@ import bcrypt from "bcryptjs";
 //GET-LOGIN
 export const getUserLogin = async (req, res) => {
     try {
-        const { addUserLogin } = req.body;//take data from client
+        const { addUserLogin } = req.body; //take data from client
         const loginPassword = addUserLogin.userPassword;
-        console.log(addUserLogin);
         
         //VALIDATION IF USER EXIST
         const user = await userRegister.findOne({ userName: addUserLogin.userName });
 
         if(user && (await bcrypt.compare(loginPassword, user.userPassword))) {
             const token = generateToken(user._id);
-            //user.token = token;
+
             const authUser = {
                 _id: user._id,
                 token: token,
@@ -34,11 +33,10 @@ export const getUserLogin = async (req, res) => {
 //CREATE-REGISTER
 export const createUserRegister = async (req, res) => {
     try {
-        const { newUserRegister } = req.body;//take data from client
-        console.log(newUserRegister);
+        const { newUserRegister } = req.body; //take data from client
 
         //VALIDATION IF USER EXIST
-        const register = await userRegister.findOne({userName: newUserRegister.userName}); //we use an object because is the MongoDB sintax, like mongoBD shell
+        const register = await userRegister.findOne({userName: newUserRegister.userName});
 
         if(register) {
             res.json({msg: 'user already exist'});
@@ -48,11 +46,11 @@ export const createUserRegister = async (req, res) => {
         //HASHING PASSWORD
         const passwordHash = await bcrypt.hash(newUserRegister.userPassword, 10);
 
-        const newRegister = new userRegister({ //and set data into the model-schema
+        const newRegister = new userRegister({ //set data into the model-schema
             userName: newUserRegister.userName,
             userPassword: passwordHash,
         });
-        const resultado = await newRegister.save();//save into mongoDB
+        const resultado = await newRegister.save(); //save into mongoDB
 
         const token = generateToken(resultado._id);
 

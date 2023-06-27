@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; //'createAsyncThunk' is a function that return another function('getListProducts') whitch will call API and return a promise. Then this function 'getListProducts' we will use to dispatch in the UI components
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; 
 import axios from "axios";
 
 //THUNK - POST
-export const addUserRegister = createAsyncThunk( //'listProducts/getListProducts' is a string parameter that will be used to generate additional Redux action type constants, representing the lifecycle of an async request: 1)pending, 2)fulfilled, 3)rejected (es decir, indica el ciclo del estado de la petición)
+export const addUserRegister = createAsyncThunk( 
     'userRegister/addUserRegister',
     async (payload) => {
 
@@ -10,7 +10,6 @@ export const addUserRegister = createAsyncThunk( //'listProducts/getListProducts
             userName: payload.registerName,
             userPassword: payload.registerPassword,
         }
-        console.log(newUserRegister);
 
         const config = {
             headers: {
@@ -19,10 +18,9 @@ export const addUserRegister = createAsyncThunk( //'listProducts/getListProducts
         };
 
         const response = await axios.post('http://localhost:4000/api/userRegisterLogin/createRegister', {newUserRegister}, config);
-        if(response.data) { //if response is good
-            const registerUser = response.data; //'response.data' is already conveted to json
-            console.log(registerUser);
-            return { registerUser };//we return an object with API data to extraReducers
+        if(response.data) { 
+            const registerUser = response.data; 
+            return { registerUser };
         }
     } 
 );
@@ -32,7 +30,7 @@ export const addUserRegister = createAsyncThunk( //'listProducts/getListProducts
 //ACTIONS
 const userRegiterSlice = createSlice({
     name: "userRegiter",
-    initialState: { //state
+    initialState: { 
         register: [],
         message: [],
     }, 
@@ -44,8 +42,7 @@ const userRegiterSlice = createSlice({
     },
     //HANDLE ASYNCTHUNK
     extraReducers: {
-        [addUserRegister.fulfilled]: (state, action) => { //when fetch is succes this receive the payload and return into the reducer
-            console.log(action.payload.registerUser);
+        [addUserRegister.fulfilled]: (state, action) => { 
             if(action.payload.registerUser.msg) {
                 state.message = action.payload.registerUser;
             } else {
@@ -55,6 +52,6 @@ const userRegiterSlice = createSlice({
     }
 });
 
-export const { cleanRegister } = userRegiterSlice.actions; //export this method to the UI
+export const { cleanRegister } = userRegiterSlice.actions; 
 
-export default userRegiterSlice.reducer; //export the reducer to import in the store.js
+export default userRegiterSlice.reducer; 

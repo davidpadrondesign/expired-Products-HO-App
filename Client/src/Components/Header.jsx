@@ -11,7 +11,7 @@ const Header = () => {
     const handleLogOut = () => {
         dispatch(removeAllState()); //reset listproducts state
         dispatch(cleanRegister());
-        dispatch(userLogOut()); //'userLoginId' es el action.payload
+        dispatch(userLogOut());
         navigate('/');
     }
 

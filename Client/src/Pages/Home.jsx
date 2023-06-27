@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUserRegister } from "../redux/userRegisterSlice";
 import { userLogin } from "../redux/userLoginSlice";
-import 'react-toastify/dist/ReactToastify.css'; //esto lo pones donde vas a renderizar
-import { ToastContainer, toast } from 'react-toastify'; //'ToastContainer' esto tambien
+import 'react-toastify/dist/ReactToastify.css'; 
+import { ToastContainer, toast } from 'react-toastify'; 
 
 //REGULAR EXPRESSION
 const REGEX_USER_NAME = /^[a-zA-Z0-9]{1,20}$/;
@@ -38,20 +38,16 @@ const Home = () => {
     useEffect(() => {
         //REGISTER
         const resultNameRegister = REGEX_USER_NAME.test(registerName);
-        console.log(resultNameRegister);
         setValidregisterName(resultNameRegister);
 
         const resultPasswordRegister = REGEX_PASSWORD.test(registerPassword);
-        console.log(resultPasswordRegister);
         setValidregisterPassword(resultPasswordRegister);
 
         //LOGIN
         const resultNameLogin = REGEX_USER_NAME.test(loginName);
-        console.log(resultNameLogin);
         setValidloginName(resultNameLogin);
 
         const resultPasswordLogin = REGEX_PASSWORD.test(loginPassword);
-        console.log(resultPasswordLogin);
         setValidloginPassword(resultPasswordLogin);
 
         if(resultNameRegister || resultPasswordRegister || resultNameLogin || resultPasswordLogin) setErrorRegisterMsg(false);
@@ -77,16 +73,14 @@ const Home = () => {
             return;
         }
 
-        console.log(`REGISTER -> user: ${registerName} - password: ${registerPassword}`);
-        dispatch(addUserRegister({ registerName, registerPassword })).then((response) => { //el callback espera la respuesta del dispatch() para redirigir
-            console.log(response);
+        dispatch(addUserRegister({ registerName, registerPassword })).then((response) => { 
             if(response.payload.registerUser.token) {
                 setRegisterName('');
                 setRegisterPassword('');
                 registerSuccessful();
             }
             if(response.payload.registerUser.msg) {
-                if(response.payload.registerUser.msg === 'user already exist') { //para traer estas 'response' hay que configurar el back-end
+                if(response.payload.registerUser.msg === 'user already exist') { 
                     registerIncorrect();
                 } else {
                     registerFail();
@@ -116,15 +110,13 @@ const Home = () => {
             return;
         }
 
-        console.log(`LOGIN -> user: ${loginName} - password: ${loginPassword}`);
-        dispatch(userLogin({ loginName, loginPassword })).then((response) => { //el callback espera la respuesta del dispatch() para redirigir. Cuando se necesite la respuesta inmediata en el componente page usar el callback de dispatch. Si estamos en otra pagina usar el useEffect()
-            console.log(response);
+        dispatch(userLogin({ loginName, loginPassword })).then((response) => { 
             if(response.payload.loginUser.token) {
                 setLoginName('');
                 setLoginPassword('');
                 navigate('/productsList');
             } 
-            if(response.payload.loginUser.msg) { //para traer estas 'response' hay que configurar el back-end
+            if(response.payload.loginUser.msg) { 
                 loginIncorrect();
             }
         }); 

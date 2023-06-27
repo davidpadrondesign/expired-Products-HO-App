@@ -15,12 +15,11 @@ const ProductsList = () => {
 
     const [alert, setAlert] = useState(false);
     const loginData = useSelector((state) => state.usersLogin.users);
-    const products = useSelector((state) => state.listproducts.productos); //notes from store.js reducer
+    const products = useSelector((state) => state.listproducts.productos); 
     const advertise = useSelector((state) => state.listproducts.advertise);
-    console.log(products);
 
     useEffect(() => {
-        dispatch(getAllListProducts(loginData.token)); //call API listProducts
+        dispatch(getAllListProducts(loginData.token)); //get list products
         
     }, [dispatch, loginData]);
 
@@ -28,9 +27,9 @@ const ProductsList = () => {
         advertise.msg ? setAlert(true) : setAlert(false);
     }, [advertise])
 
-    const bckpProducts = [...products]; //hacer copia con 'spread operator'. Esta forma NO FUNCIONA -> const bckpProducts = products;
+    const bckpProducts = [...products]; 
 
-    const orderedProducts = bckpProducts.sort((a, b) => a.statusNumber - b.statusNumber); //ordenamos por statusNumber y te devolvemos un array ordenado
+    const orderedProducts = bckpProducts.sort((a, b) => a.statusNumber - b.statusNumber); //order by statusNumber
 
     const redirectLogin = () => {
         dispatch(removeAdvertise());

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { updateProducts, deleteSingleProduct } from "../redux/listProductsSlice";
 
 const ProductRow = ({ product, loginData }) => {
-    //use react-hook instead vanilla js
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let [alert, setAlert] = useState(false);
@@ -20,40 +20,32 @@ const ProductRow = ({ product, loginData }) => {
         expireDay.setDate(product.product.expireProductDate.expireProductDay);
         expireDay.setMonth(product.product.expireProductDate.expireProductMonth - 1); //mines 1 for fix the time, month goes from 0 - 11
         expireDay.setFullYear(product.product.expireProductDate.expireProductYear);
-        console.log(`New expireDay -> ${expireDay}`);
 
         const timeLeftMonth = () => {
             const result = expireDay.getMonth() - currentDate.getMonth();
-            console.log(`result -> ${result}`);
             return result;
         }
         const resultMonth = timeLeftMonth();
 
         if(currentDate.getDate() === expireDay.getDate() && currentDate.getMonth() === expireDay.getMonth() && currentDate.getFullYear() === expireDay.getFullYear()) {
-            setAlert(true);
-            console.log('entre en Deprecate'); //DARK-RED
-            dispatch(updateProducts({ _id: product.product._id, deprecate: true })); //pasamos solamente la propiedad a modificar dentro de un objeto -> 'deprecate: true' no hace falta hacer products.deprecate: true
+            setAlert(true); //DARK-RED
+            dispatch(updateProducts({ _id: product.product._id, deprecate: true }));
         } else if(resultMonth === 2) { 
-            setAlert2(true);
-            console.log('entre en 2Month'); //YELLOW
+            setAlert2(true); //YELLOW
             dispatch(updateProducts({ _id: product.product._id, statusNumber: 2, deprecate: false}));
         } else if (resultMonth === 1) {
-            setAlert3(true);
-            console.log('entre en 1Month'); //RED
+            setAlert3(true); //RED
             dispatch(updateProducts({ _id: product.product._id, statusNumber: 3, deprecate: false}));
         } else if (resultMonth === 0) {
-            setAlert4(true);
-            console.log('entre en Actual-Month'); //RED
+            setAlert4(true); //RED
             dispatch(updateProducts({ _id: product.product._id, statusNumber: 4, deprecate: false}));
         } else { 
-            alert = false;
-            console.log('entre en Succes'); //GREEN statusNumber -> default: 1
+            setAlert(false); //GREEN statusNumber -> default: 1
         }
-    }, []); //'[]' dependecia vacia para que solo el useEffect se ejecute una sola ves
+    }, []);
 
 
     const alertClass = alert ? 'alert-deprecate' : alert2 ? 'alert-2month' : alert3 ? 'alert-1month' : alert4 ? 'alert-Actual-month' : 'alert-success';
-    console.log(alertClass);
 
     const handleDeleteClick = () => {
         dispatch(deleteSingleProduct({ _id: product.product._id, loginToken: product.loginData }));

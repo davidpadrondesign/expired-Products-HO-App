@@ -40,7 +40,6 @@ body {
 /* ALERTS-TABLE*/
 .alert-deprecate {
   background-color: rgba(87, 0, 17, 0.9);
-  /* background-color: rgba(121, 0, 24, 0.9); */
 }
 .alert-Actual-month {
   background-color: rgba(192, 0, 6, 0.6);
@@ -64,7 +63,6 @@ body {
 .center-container {
   width: 100%;
   margin: 0 auto; /*margin-space*/
-  /* min-width: 1000px; */
 }
 .container-title {
   width: 100%;
@@ -74,7 +72,7 @@ body {
 .container-redirect {
   width: 100%; /*genero el ancho total de la pantalla*/
   height: 100%;
-  position: absolute; /*use 'position:absolute' para romper el flijo normal del DOM*/
+  position: absolute; /*use 'position:absolute' para romper el flujo normal del DOM*/
   top: 50%; 
   left: 50%;
   transform: translate(-50%, -50%); 

@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const PrivateRoute = () => {
-  const loginData = useSelector((state) => state.usersLogin.users); //call from store.js reducer
+  const loginData = useSelector((state) => state.usersLogin.users);
 
   const [activeOutlet, setActiveOutlet] = useState(false);
   const [activeUnauthorize, setActiveUnauthorize] = useState(false);

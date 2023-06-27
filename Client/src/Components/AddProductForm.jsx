@@ -6,7 +6,7 @@ import { addProducts, updateSingleProduct } from '../redux/listProductsSlice';
 import axios from 'axios';
 
 //REGULAR EXPRESSION
-const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9\s]{1,60}$/; //allow -> letters, numbers, spaces. Otra forma -> /^[A-Za-z0-9\s]+$/g
+const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9\s]{1,60}$/; //allow -> letters, numbers, spaces.
 const REGEX_PRODUCT_ULR = /^[a-zA-Z0-9.\-_:\/]{1,150}$/; //allow -> letters, numbers, `:` `/` `.` `-` `_` 
 const REGEX_PRODUCT_NUMBERS = /^[0-9]+(\.[0-9]+)?$/; //allow -> whole and decimal numbers with one point after a number. Valid for both cases ex: 3 or 3.14
 
@@ -20,7 +20,7 @@ const AddProductForm = () => {
     const [ products, setProducts ] = useState({ 
         productName: '',
         productImage: '',
-        price: 0, //colocar como string para poder colocar numero con decimales. Si a posterior necesitas pasarlo a tipo Number lo parseas
+        price: 0, 
         expire: { day: 0, month: 0, year: 0 },
     });
 
@@ -35,7 +35,6 @@ const AddProductForm = () => {
         const loadOneProduct = async () => {
             if(params.id) {
                 const response = await axios.get(`http://localhost:4000/api/listProducts/oneProduct/${params.id}`);
-                console.log(response.data);
 
                 setProducts({ ...products,
                 productName: response.data.productName,
@@ -55,30 +54,25 @@ const AddProductForm = () => {
     useEffect(() => {
         //PRODUCT NAME
         const resultName = REGEX_PRODUCT_NAME.test(products.productName);
-        console.log(resultName);
-        //resultName ? setValidProductName(resultName) : showInfo ? setShowInfo(true) : setShowInfo(false);
         setValidProductName(resultName);
 
         //PRODUCT URL
         const resultUrl = REGEX_PRODUCT_ULR.test(products.productImage);
-        console.log(resultUrl);
         setValidProductImage(resultUrl);
 
         //PRODUCT PRICE
         const resultPrice = REGEX_PRODUCT_NUMBERS.test(products.price);
-        console.log(resultPrice);
         setValidProductPrice(resultPrice);
 
         //PRODUCT EXPIRE
         const resultExpireDay = REGEX_PRODUCT_NUMBERS.test(products.expire.day);
         const resultExpireMonth = REGEX_PRODUCT_NUMBERS.test(products.expire.month);
         const resultExpireYear = REGEX_PRODUCT_NUMBERS.test(products.expire.year);
-        console.log(resultExpireDay, resultExpireMonth, resultExpireYear);
 
-        if(!resultExpireDay || !resultExpireMonth || !resultExpireYear) { //si el resultado es 'false'
-            setValidProductExpire(false); //lo setteas como false
+        if(!resultExpireDay || !resultExpireMonth || !resultExpireYear) { 
+            setValidProductExpire(false); 
         } else {
-            setValidProductExpire(true); //el valor '0' lo identifica como 'true'
+            setValidProductExpire(true); 
         }
 
         if(resultName || resultUrl || resultPrice || resultExpireDay || resultExpireMonth || resultExpireYear) setErrorMsg(false);
@@ -88,7 +82,6 @@ const AddProductForm = () => {
 
     const handleForm = (e) => {
         e.preventDefault();
-        console.log(products);
 
         //VALIDATION BLACK-FIELDS
         if(!products.productName || !products.productImage || products.price === 0 || products.expire.day <= 0 || products.expire.month <= 0 || products.expire.year <= 0) {
@@ -120,9 +113,9 @@ const AddProductForm = () => {
 
             const newExpireProductUpdate = expireProductUpdate.toDateString(); //transform to this format string 'Sun Oct 15 2023'
 
-            products.expireTimeUpdate = newExpireProductUpdate; //add new 'key' to the 'products' object
+            products.expireTimeUpdate = newExpireProductUpdate; 
 
-            dispatch(updateSingleProduct({ products, _id: params.id, loginToken: loginData.token })); //en este caso no colocamos 'products' dentro de un objeto por que ya lo es. Si no fuera un objeto entonces -> dispatch(addProducts({ newProduct: products }));
+            dispatch(updateSingleProduct({ products, _id: params.id, loginToken: loginData.token }));
         } else {
             const expireProduct = new Date;
 
@@ -132,17 +125,13 @@ const AddProductForm = () => {
 
             const newExpireProduct = expireProduct.toDateString(); //transform to this format string 'Sun Oct 15 2023'
 
-            products.expireTime = newExpireProduct; //add new 'key' to the 'products' object
-            console.log(`Update Object -> ${products.expireTime}`);
+            products.expireTime = newExpireProduct; 
 
-            //if(!products.productName || !products.productImage || !products.price || !products.expire.day || !products.expire.month || !products.expire.year) alert('some empty field :(');
-            dispatch(addProducts({ products, loginToken: loginData.token })); //en este caso no colocamos 'products' dentro de un objeto por que ya lo es. Si no fuera un objeto entonces -> dispatch(addProducts({ newProduct: products }));
+            dispatch(addProducts({ products, loginToken: loginData.token }));
 
             //CLEAN FORM
             setProducts({ ...products, productName: '', productImage: '', price: 0, expire: {...products.expire, day: 0, month: 0, year: 0} });
         }
-        
-        //CLEAN FORM
     }
     
     return (
@@ -154,7 +143,7 @@ const AddProductForm = () => {
                 <form onSubmit={handleForm} className="center-container-flex-colum">
                     <div className='elements-container'>
                         <label className='labelTitle' htmlFor="ProductName">Name:</label>
-                        <input onChange={(e) => setProducts({ ...products, productName: e.target.value })} value={products.productName} className="inputTitle" name="ProductName" type="text" placeholder="Your Product Name..."/> {/*setProducts({ ...products, productName: e.target.value }) -> utilizar spread operator para indicarle que actualizamos el objeto 'products' con el nuevo valor para la key 'productName'*/}
+                        <input onChange={(e) => setProducts({ ...products, productName: e.target.value })} value={products.productName} className="inputTitle" name="ProductName" type="text" placeholder="Your Product Name..."/> 
                         
                     </div>
                     <p className={validProductName || !products.productName ? 'display-Off' : 'display-On warning-info' }>
