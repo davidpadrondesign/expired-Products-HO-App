@@ -15,8 +15,7 @@ const app = express();
 //SETTING
 const port = process.env.PORT || 4000; 
 
-//MIDDLEWARE
-//app.use(morgan('dev')); 
+//MIDDLEWARE 
 app.use(cors());
 app.use(bodyParser.json()); 
 app.use(express.json());
