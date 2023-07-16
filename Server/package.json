@@ -2,12 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon .Server/server.js",
-    "vercel-build": "echo hello"
+    "start": "node api/index.js",
+    "dev": "nodemon .Server/api/index.js"
   },
   "keywords": [],
   "author": "",
