@@ -26,3 +26,5 @@ app.use('/api/userRegisterLogin', userRegisterRoute);
 
 //RUN SERVER
 app.listen(port, console.log(`Server running on port ${port}`.brightGreen));
+
+export default app;
