@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllProducts, getOneProduct, createProduct, updateProduct, updateSingleProduct, deleteProduct } from "../Controllers/listProducts.controller.js";
+import { getAllProducts, getOneProduct, createProduct, updateProduct, updateSingleProduct, deleteProduct } from "../controllers/listProducts.controller.js";
 import protect from "../middleware/AuthMiddleware.js";
 
 const listProductsRoute = express.Router();
