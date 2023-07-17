@@ -4,7 +4,6 @@ import ProductsList from "./Pages/ProductsList";
 import NotFoundPage from "./Pages/NotFountPage";
 import AddProductForm from "./Components/AddProductForm";
 import Unauthorized from "./Pages/Unauthorize";
-import SessionExpired from "./Components/SessionExpired";
 import PrivateRoute from "./Components/PrivateRoute";
 
 const App = () => {
@@ -13,7 +12,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={ <Home /> }/>
         <Route path='/unauthorized' element={ <Unauthorized /> } />
-        <Route path='/sessionExpired' element={ <SessionExpired /> } />
         <Route element={ <PrivateRoute /> }>
           <Route path='/productsList' element={ <ProductsList /> } />
         </Route>
