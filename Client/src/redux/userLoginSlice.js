@@ -17,7 +17,7 @@ export const userLogin = createAsyncThunk(
             },
         };
 
-        const response = await axios.post('http://localhost:4000/api/userRegisterLogin/getUserLogin', {addUserLogin}, config);
+        const response = await axios.post('https://expired-products-ho-app-api-v1.vercel.app/api/userRegisterLogin/getUserLogin', {addUserLogin}, config);
         if(response.data) { 
             const loginUser = response.data; 
             return { loginUser };

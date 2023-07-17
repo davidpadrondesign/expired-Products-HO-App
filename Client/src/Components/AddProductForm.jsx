@@ -34,7 +34,7 @@ const AddProductForm = () => {
     useEffect(() => {
         const loadOneProduct = async () => {
             if(params.id) {
-                const response = await axios.get(`http://localhost:4000/api/listProducts/oneProduct/${params.id}`);
+                const response = await axios.get(`https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/oneProduct/${params.id}`);
 
                 setProducts({ ...products,
                 productName: response.data.productName,

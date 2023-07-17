@@ -14,7 +14,7 @@ export const getAllListProducts = createAsyncThunk(
             },
         };
 
-        const response = await axios.get('http://localhost:4000/api/listProducts/allProducts', config);
+        const response = await axios.get('https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/allProducts', config);
         if(response.data) { 
             const allLisProducts = response.data; 
             return { allLisProducts };
@@ -43,7 +43,7 @@ export const addProducts = createAsyncThunk(
             },
         };
 
-        const response = await axios.post('http://localhost:4000/api/listProducts/createProduct', {dataNewProduct}, config);
+        const response = await axios.post('https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/createProduct', {dataNewProduct}, config);
         if(response.data) { 
             const AddedProduct = response.data; 
             return { AddedProduct };
@@ -62,7 +62,7 @@ export const updateProducts = createAsyncThunk(
             },
         };
 
-        const response = await axios.put(`http://localhost:4000/api/listProducts/updateProduct/${payload._id}`, payload, config); 
+        const response = await axios.put(`https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/updateProduct/${payload._id}`, payload, config); 
     } 
 );
 
@@ -86,7 +86,7 @@ export const updateSingleProduct = createAsyncThunk(
             },
         };
 
-        const response = await axios.put(`http://localhost:4000/api/listProducts/updateSingleProduct/${payload._id}`, { updateDataSingleProduct }, config); 
+        const response = await axios.put(`https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/updateSingleProduct/${payload._id}`, { updateDataSingleProduct }, config); 
     } 
 );
 
@@ -102,7 +102,7 @@ export const deleteSingleProduct = createAsyncThunk(
             },
         };
 
-        const response = await axios.delete(`http://localhost:4000/api/listProducts/deleteProduct/${payload._id}`, config); 
+        const response = await axios.delete(`https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/deleteProduct/${payload._id}`, config); 
     } 
 );
 
