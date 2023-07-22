@@ -8,8 +8,8 @@ import axios from 'axios';
 //REGULAR EXPRESSION
 const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9.\s]{1,60}$/; //allow -> letters, numbers, spaces and point.
 const REGEX_PRODUCT_ULR = /^[a-zA-Z0-9.\-_:\/]{1,150}$/; //allow -> letters, numbers, `:` `/` `.` `-` `_` 
-const REGEX_PRODUCT_PRICE = /^[0-9]+([,.][0-9]+)?$/; //allow -> 0-9 numbers with one '.' or ','
-const REGEX_PRODUCT_NUMBERS = /^[1-9][0-9]*$/; //allow -> positive integers
+const REGEX_PRODUCT_PRICE = /^[0-9]+([,.][0-9]+)*$/; //allow -> 0-9 numbers with one '.' or ','
+const REGEX_PRODUCT_NUMBERS = /^[0-9][0-9]*$/; //allow -> positive integers beginin with '0'
 
 const AddProductForm = () => {
 
