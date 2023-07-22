@@ -89,7 +89,6 @@ export const updateSingleProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     try {
         const id = req.params.id;
-
         const response = await listProducts.findByIdAndRemove(id);
 
         if(!response) {

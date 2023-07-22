@@ -102,7 +102,8 @@ export const deleteSingleProduct = createAsyncThunk(
             },
         };
 
-        const response = await axios.delete(`https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/deleteProduct/${payload._id}`, config); 
+        const response = await axios.delete(`https://expired-products-ho-app-api-v1.vercel.app/api/listProducts/deleteProduct/${payload._id}`, config);
+        console.log(response);
     } 
 );
 

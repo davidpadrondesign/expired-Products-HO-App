@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateProducts, deleteSingleProduct } from "../redux/listProductsSlice";
 
-const ProductRow = ({ product, loginData }) => {
+const ProductRow = ({ product }) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
