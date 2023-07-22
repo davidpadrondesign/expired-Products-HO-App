@@ -5,7 +5,7 @@ const listProductsSchema = new Schema(
   {
     productName: { type: String, require: true },
     productImage: { type: String, require: true },
-    price: { type: Number, require: true },
+    price: { type: String, require: true },
     expireTime: { type: String, require: true },
     expireProductDate: { type: Object, required: true },
     deprecate: { type: Boolean, default: false, required: true },
