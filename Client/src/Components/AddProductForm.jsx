@@ -20,7 +20,7 @@ const AddProductForm = () => {
     const [ products, setProducts ] = useState({ 
         productName: '',
         productImage: '',
-        price: 0, 
+        price: '0', 
         expire: { day: 0, month: 0, year: 0 },
     });
 
@@ -162,7 +162,7 @@ const AddProductForm = () => {
 
                     <div className='elements-container'>
                         <label className='labelTitle' htmlFor="ProductPrice">Price:</label>
-                        <input onChange={(e) => setProducts({ ...products, price: Number(e.target.value) })} value={products.price} className="inputTitle" name="ProductPrice" type="number" placeholder="Your Product price $..."/>
+                        <input onChange={(e) => setProducts({ ...products, price: Number(e.target.value) })} value={products.price} className="inputTitle" name="ProductPrice" type="text" placeholder="Your Product price $..."/>
                     </div>
                     <p className={validProductPrice ? 'display-Off' : 'display-On warning-info' }>
                         Allowed whole and decimal numbers
