@@ -6,7 +6,7 @@ import { addProducts, updateSingleProduct } from '../redux/listProductsSlice';
 import axios from 'axios';
 
 //REGULAR EXPRESSION
-const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9\s]{1,60}$/; //allow -> letters, numbers, spaces.
+const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9.\s]{1,60}$/; //allow -> letters, numbers, spaces and point.
 const REGEX_PRODUCT_ULR = /^[a-zA-Z0-9.\-_:\/]{1,150}$/; //allow -> letters, numbers, `:` `/` `.` `-` `_` 
 const REGEX_PRODUCT_NUMBERS = /^[0-9]+(\.[0-9]+)?$/; //allow -> whole and decimal numbers with one point after a number. Valid for both cases ex: 3 or 3.14
 
