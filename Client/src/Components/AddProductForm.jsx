@@ -6,9 +6,10 @@ import { addProducts, updateSingleProduct } from '../redux/listProductsSlice';
 import axios from 'axios';
 
 //REGULAR EXPRESSION
-const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9.,\s]{1,60}$/; //allow -> letters, numbers, spaces and point.
+const REGEX_PRODUCT_NAME = /^[a-zA-Z0-9.\s]{1,60}$/; //allow -> letters, numbers, spaces and point.
 const REGEX_PRODUCT_ULR = /^[a-zA-Z0-9.\-_:\/]{1,150}$/; //allow -> letters, numbers, `:` `/` `.` `-` `_` 
-const REGEX_PRODUCT_NUMBERS = /^[0-9]+(\.[0-9]+)?$/; //allow -> whole and decimal numbers with one point after a number. Valid for both cases ex: 3 or 3.14
+const REGEX_PRODUCT_PRICE = /^[0-9]+([,.][0-9]+)?$/; //allow -> 0-9 numbers with one '.' or ','
+const REGEX_PRODUCT_NUMBERS = /^[1-9][0-9]*$/; //allow -> positive integers
 
 const AddProductForm = () => {
 
@@ -61,7 +62,7 @@ const AddProductForm = () => {
         setValidProductImage(resultUrl);
 
         //PRODUCT PRICE
-        const resultPrice = REGEX_PRODUCT_NUMBERS.test(products.price);
+        const resultPrice = REGEX_PRODUCT_PRICE.test(products.price);
         setValidProductPrice(resultPrice);
 
         //PRODUCT EXPIRE
@@ -92,7 +93,7 @@ const AddProductForm = () => {
         //VALIDATION HACK JS
         const v1 = REGEX_PRODUCT_NAME.test(products.productName);
         const v2 = REGEX_PRODUCT_ULR.test(products.productImage);
-        const v3 = REGEX_PRODUCT_NUMBERS.test(products.price);
+        const v3 = REGEX_PRODUCT_PRICE.test(products.price);
         const v4 = REGEX_PRODUCT_NUMBERS.test(products.expire.day);
         const v5 = REGEX_PRODUCT_NUMBERS.test(products.expire.month);
         const v6 = REGEX_PRODUCT_NUMBERS.test(products.expire.year);
