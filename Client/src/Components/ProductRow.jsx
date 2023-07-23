@@ -27,16 +27,22 @@ const ProductRow = ({ product }) => {
         }
         const resultMonth = timeLeftMonth();
 
+        const timeLeftYear = () => {
+            const result = expireDay.getFullYear() - currentDate.getFullYear();
+            return result;
+        }
+        const resultYear = timeLeftYear();
+
         if(currentDate.getDate() === expireDay.getDate() && currentDate.getMonth() === expireDay.getMonth() && currentDate.getFullYear() === expireDay.getFullYear()) {
             setAlert(true); //DARK-RED
             dispatch(updateProducts({ _id: product.product._id, deprecate: true }));
-        } else if(resultMonth === 2) { 
+        } else if(resultMonth === 2 && resultYear === 0) { 
             setAlert2(true); //YELLOW
             dispatch(updateProducts({ _id: product.product._id, statusNumber: 2, deprecate: false}));
-        } else if (resultMonth === 1) {
+        } else if (resultMonth === 1 && resultYear === 0) {
             setAlert3(true); //RED
             dispatch(updateProducts({ _id: product.product._id, statusNumber: 3, deprecate: false}));
-        } else if (resultMonth === 0) {
+        } else if (resultMonth === 0 && resultYear === 0) {
             setAlert4(true); //RED
             dispatch(updateProducts({ _id: product.product._id, statusNumber: 4, deprecate: false}));
         } else { 
